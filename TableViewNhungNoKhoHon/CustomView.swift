@@ -17,6 +17,7 @@ class CustomView: UIView {
      // Drawing code
      }
      */
+    var isChecked = false
     
     let vwContainer: UIView = {
         let vw = UIView()
@@ -62,8 +63,9 @@ class CustomView: UIView {
         return stackView
     }()
     
-    let imvCheck: UIImageView = {
-        let imv = UIImageView()
+    let btnCheck: UIButton = {
+        let imv = UIButton()
+        imv.addTarget(self, action: #selector(imageTapped), for: .touchUpInside)
         imv.translatesAutoresizingMaskIntoConstraints = false
         return imv
     }()
@@ -243,17 +245,32 @@ class CustomView: UIView {
         stackView.rightAnchor.constraint(equalTo: vwBottomView.rightAnchor).isActive = true
 
         
-        self.addSubview(imvCheck)
+        self.addSubview(btnCheck)
         
-        imvCheck.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        imvCheck.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        imvCheck.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        imvCheck.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        btnCheck.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        btnCheck.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        btnCheck.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        btnCheck.widthAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     func setImage(img: UIImage) {
         DispatchQueue.main.async {
-            self.imvCheck.image = img
+            self.btnCheck.setImage(img, for: .normal)
+        }
+    }
+    
+    @objc func imageTapped() {
+        if isChecked == true {
+            isChecked = false
+            DispatchQueue.main.async {
+                self.btnCheck.setImage(UIImage(named: "imgCheckWhite"), for: .normal)
+            }
+        }
+        else if isChecked == false {
+            isChecked = true
+            DispatchQueue.main.async {
+                self.btnCheck.setImage(UIImage(named: "imgCheckRed"), for: .normal)
+            }
         }
     }
     
