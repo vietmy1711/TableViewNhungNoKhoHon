@@ -273,5 +273,4 @@ class CustomView: UIView {
             }
         }
     }
-    
 }
