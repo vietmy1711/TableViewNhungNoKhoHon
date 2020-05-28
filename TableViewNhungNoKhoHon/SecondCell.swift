@@ -10,10 +10,14 @@ import UIKit
 
 class SecondCell: UITableViewCell {
     
+    var isFirst = false
+    
+    var isLast = false
+    
     let vwView: UIView = {
         let vw = UIView()
         vw.backgroundColor = UIColor(red: 97/255, green: 140/255, blue: 234/255, alpha: 1)
-        vw.layer.cornerRadius = 5
+        vw.layer.cornerRadius = 4
         vw.layer.shadowColor = UIColor.black.cgColor
         vw.layer.shadowOpacity = 0.2
         vw.layer.shadowOffset = .zero
@@ -43,8 +47,6 @@ class SecondCell: UITableViewCell {
     }()
     
     let customView1 = CustomView()
-    let customView2 = CustomView()
-    let customView3 = CustomView()
     
     
     override func awakeFromNib() {
@@ -52,36 +54,62 @@ class SecondCell: UITableViewCell {
         // Initialization code
         contentView.backgroundColor = UIColor(red: 246/255, green: 248/255, blue: 251/255, alpha: 1)
         contentView.addSubview(vwView)
-        
-        vwView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6).isActive = true
-        vwView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6).isActive = true
+    }
+    
+    func setupCell() {
+        if isFirst == true {
+            vwView.layer.maskedCorners = [ .layerMaxXMinYCorner,.layerMinXMinYCorner]
+
+            vwView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6).isActive = true
+            vwView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0).isActive = true
+            vwView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 6).isActive = true
+            vwView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -6).isActive = true
+            
+            vwView.addSubview(lblTop)
+            
+            lblTop.topAnchor.constraint(equalTo: vwView.topAnchor, constant: 6).isActive = true
+            lblTop.leftAnchor.constraint(equalTo: vwView.leftAnchor, constant: 20).isActive = true
+            lblTop.rightAnchor.constraint(equalTo: vwView.rightAnchor, constant: -20).isActive = true
+            
+            customView1.setImage(img: UIImage(named: "imgCheckRed")!)
+            vwView.addSubview(customView1)
+            
+            customView1.topAnchor.constraint(equalTo: lblTop.bottomAnchor, constant: 4).isActive = true
+            customView1.bottomAnchor.constraint(equalTo: vwView.bottomAnchor).isActive = true
+            customView1.leftAnchor.constraint(equalTo: vwView.leftAnchor).isActive = true
+            customView1.rightAnchor.constraint(equalTo: vwView.rightAnchor).isActive = true
+            return
+        }
+        if isLast == true {
+            vwView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+
+            vwView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
+            vwView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6).isActive = true
+            vwView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 6).isActive = true
+            vwView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -6).isActive = true
+            
+            vwView.addSubview(customView1)
+            customView1.setImage(img: UIImage(named: "imgCheckWhite")!)
+            customView1.topAnchor.constraint(equalTo: vwView.topAnchor).isActive = true
+            customView1.bottomAnchor.constraint(equalTo: vwView.bottomAnchor, constant: -2).isActive = true
+            customView1.leftAnchor.constraint(equalTo: vwView.leftAnchor).isActive = true
+            customView1.rightAnchor.constraint(equalTo: vwView.rightAnchor).isActive = true
+            return
+        }
+        vwView.layer.cornerRadius = 0
+
+        vwView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0).isActive = true
+        vwView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0).isActive = true
         vwView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 6).isActive = true
         vwView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -6).isActive = true
         
-        vwView.addSubview(lblTop)
-        
-        lblTop.topAnchor.constraint(equalTo: vwView.topAnchor, constant: 6).isActive = true
-        lblTop.leftAnchor.constraint(equalTo: vwView.leftAnchor, constant: 20).isActive = true
-        lblTop.rightAnchor.constraint(equalTo: vwView.rightAnchor, constant: -20).isActive = true
-        
-        vwView.addSubview(stackView)
-        
-        stackView.topAnchor.constraint(equalTo: lblTop.bottomAnchor, constant: 0).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: vwView.bottomAnchor).isActive = true
-        stackView.leftAnchor.constraint(equalTo: vwView.leftAnchor).isActive = true
-        stackView.rightAnchor.constraint(equalTo: vwView.rightAnchor).isActive = true
-        
-        customView1.lbl4.text = "stackView.rightAnchor.constraint(equalTo: vwView.rightAnchor).isActive = true"
-        
-        customView2.lblTop.text = "stackView.rightAnchor.constraint(equalTo: vwView.rightAnchor).isActive = true nqiuwehqwuyegqweygqw"
-
-        
-        stackView.addArrangedSubview(customView1)
-        customView1.setImage(img: UIImage(named: "imgCheckRed")!)
-        stackView.addArrangedSubview(customView2)
-        customView2.setImage(img: UIImage(named: "imgCheckWhite")!)
-        stackView.addArrangedSubview(customView3)
-        customView3.setImage(img: UIImage(named: "imgCheckWhite")!)
+        vwView.addSubview(customView1)
+        customView1.setImage(img: UIImage(named: "imgCheckWhite")!)
+        customView1.topAnchor.constraint(equalTo: vwView.topAnchor).isActive = true
+        customView1.bottomAnchor.constraint(equalTo: vwView.bottomAnchor).isActive = true
+        customView1.leftAnchor.constraint(equalTo: vwView.leftAnchor).isActive = true
+        customView1.rightAnchor.constraint(equalTo: vwView.rightAnchor).isActive = true
+        return
         
     }
     
@@ -92,5 +120,16 @@ class SecondCell: UITableViewCell {
     }
     
     
+    
+}
+
+extension UIView {
+    
+    func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
+    }
     
 }

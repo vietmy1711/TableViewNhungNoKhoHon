@@ -62,15 +62,22 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SecondCell", for: indexPath)
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "FirstCell", for: indexPath)
             return cell
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FirstCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SecondCell", for: indexPath) as! SecondCell
+        if indexPath.row == 1 {
+            cell.isFirst = true
+        }
+        if indexPath.row == 3 {
+            cell.isLast = true
+        }
+        cell.setupCell()
         return cell
     }
     
