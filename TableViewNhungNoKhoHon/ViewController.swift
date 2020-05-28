@@ -16,6 +16,16 @@ class ViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+    
+    let btnBottom: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Lorem ipsum", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 14)
+        btn.backgroundColor = UIColor(red: 97/255, green: 140/255, blue: 234/255, alpha: 1)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        return btn
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,14 +40,22 @@ class ViewController: UIViewController {
 
     func setupUI() {
         view.addSubview(tableView)
+        view.addSubview(btnBottom)
         
         tableView.backgroundColor = UIColor(red: 246/255, green: 248/255, blue: 251/255, alpha: 1)
         tableView.separatorStyle = .none
         
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: btnBottom.topAnchor, constant: -10).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        
+        btnBottom.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 6).isActive = true
+        btnBottom.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -6).isActive = true
+        btnBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10).isActive = true
+        btnBottom.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        btnBottom.layer.cornerRadius = 25
 
     }
 }

@@ -22,6 +22,44 @@ class FirstCell: UITableViewCell {
         return vw
     }()
     
+    let vwYellow: UIView = {
+        let vw = UIView()
+        vw.layer.cornerRadius = 2
+        vw.backgroundColor = UIColor(red: 246/255, green: 194/255, blue: 68/255, alpha: 1)
+        vw.translatesAutoresizingMaskIntoConstraints = false
+        return vw
+    }()
+    
+    let vwBlue: UIView = {
+        let vw = UIView()
+        vw.layer.cornerRadius = 2
+        vw.backgroundColor = UIColor(red: 97/255, green: 140/255, blue: 234/255, alpha: 1)
+        vw.translatesAutoresizingMaskIntoConstraints = false
+        return vw
+    }()
+    
+    let lblYellow: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Lorem"
+        lbl.textAlignment = .left
+        lbl.textColor = .white
+        lbl.font = UIFont(name: "Helvetica-Bold", size: 14)
+        lbl.numberOfLines = 0
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        return lbl
+    }()
+    
+    let lblBlue: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "Lorem ipsum"
+        lbl.textAlignment = .left
+        lbl.textColor = .white
+        lbl.font = UIFont(name: "Helvetica-Bold", size: 14)
+        lbl.numberOfLines = 0
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        return lbl
+    }()
+    
     let lblTop: UILabel = {
         let lbl = UILabel()
         lbl.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -88,6 +126,13 @@ class FirstCell: UITableViewCell {
         return lbl
     }()
     
+    let imvCheck: UIImageView = {
+        let imv = UIImageView()
+        imv.image = UIImage(named: "imgCheckWhite")
+        imv.translatesAutoresizingMaskIntoConstraints = false
+        return imv
+    }()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -109,9 +154,33 @@ class FirstCell: UITableViewCell {
         vwView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 6).isActive = true
         vwView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -6).isActive = true
         
+        vwView.addSubview(vwYellow)
+        
+        vwYellow.topAnchor.constraint(equalTo: vwView.topAnchor, constant: 10).isActive = true
+        vwYellow.leftAnchor.constraint(equalTo: vwView.leftAnchor, constant: 6).isActive = true
+        
+        vwView.addSubview(vwBlue)
+        
+        vwBlue.topAnchor.constraint(equalTo: vwView.topAnchor, constant: 10).isActive = true
+        vwBlue.leftAnchor.constraint(equalTo: vwYellow.rightAnchor, constant: 4).isActive = true
+        
+        vwYellow.addSubview(lblYellow)
+        
+        lblYellow.topAnchor.constraint(equalTo: vwYellow.topAnchor, constant: 2).isActive = true
+        lblYellow.bottomAnchor.constraint(equalTo: vwYellow.bottomAnchor, constant: -2).isActive = true
+        lblYellow.leftAnchor.constraint(equalTo: vwYellow.leftAnchor, constant: 2).isActive = true
+        lblYellow.rightAnchor.constraint(equalTo: vwYellow.rightAnchor, constant: -2).isActive = true
+        
+        vwBlue.addSubview(lblBlue)
+        
+        lblBlue.topAnchor.constraint(equalTo: vwBlue.topAnchor, constant: 2).isActive = true
+        lblBlue.bottomAnchor.constraint(equalTo: vwBlue.bottomAnchor, constant: -2).isActive = true
+        lblBlue.leftAnchor.constraint(equalTo: vwBlue.leftAnchor, constant: 2).isActive = true
+        lblBlue.rightAnchor.constraint(equalTo: vwBlue.rightAnchor, constant: -2).isActive = true
+        
         vwView.addSubview(lblTop)
         
-        lblTop.topAnchor.constraint(equalTo: vwView.topAnchor, constant: 6).isActive = true
+        lblTop.topAnchor.constraint(equalTo: vwYellow.bottomAnchor, constant: 6).isActive = true
         lblTop.leftAnchor.constraint(equalTo: vwView.leftAnchor, constant: 6).isActive = true
         lblTop.rightAnchor.constraint(equalTo: vwView.rightAnchor, constant: -6).isActive = true
         
@@ -145,6 +214,13 @@ class FirstCell: UITableViewCell {
         lbl5.bottomAnchor.constraint(equalTo: vwView.bottomAnchor, constant: -10).isActive = true
         lbl5.leftAnchor.constraint(equalTo: vwView.leftAnchor, constant: 6).isActive = true
         lbl5.rightAnchor.constraint(equalTo: vwView.rightAnchor, constant: -6).isActive = true
+        
+        vwView.addSubview(imvCheck)
+        
+        imvCheck.rightAnchor.constraint(equalTo: vwView.rightAnchor, constant: -2).isActive = true
+        imvCheck.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        imvCheck.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        imvCheck.centerYAnchor.constraint(equalTo: vwView.centerYAnchor, constant: 20).isActive = true
     }
     
     
