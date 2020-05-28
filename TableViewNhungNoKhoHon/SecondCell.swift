@@ -77,8 +77,11 @@ class SecondCell: UITableViewCell {
 
         
         stackView.addArrangedSubview(customView1)
+        customView1.setImage(img: UIImage(named: "imgCheckRed")!)
         stackView.addArrangedSubview(customView2)
+        customView2.setImage(img: UIImage(named: "imgCheckWhite")!)
         stackView.addArrangedSubview(customView3)
+        customView3.setImage(img: UIImage(named: "imgCheckWhite")!)
         
     }
     
@@ -87,5 +90,7 @@ class SecondCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
+    
+    
     
 }

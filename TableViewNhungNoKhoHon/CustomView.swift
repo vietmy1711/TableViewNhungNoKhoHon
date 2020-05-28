@@ -62,6 +62,11 @@ class CustomView: UIView {
         return stackView
     }()
     
+    let imvCheck: UIImageView = {
+        let imv = UIImageView()
+        imv.translatesAutoresizingMaskIntoConstraints = false
+        return imv
+    }()
     
     let lblTop: UILabel = {
         let lbl = UILabel()
@@ -164,12 +169,13 @@ class CustomView: UIView {
     func setupView() {
         self.addSubview(vwContainer)
         
+        
         vwContainer.topAnchor.constraint(equalTo: self.topAnchor, constant: 4).isActive = true
         vwContainer.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -4).isActive = true
         vwContainer.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 4).isActive = true
         vwContainer.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -4).isActive = true
-        //vwContainer.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
+
         vwContainer.addSubview(vwView)
         
         vwView.topAnchor.constraint(equalTo: vwContainer.topAnchor).isActive = true
@@ -192,19 +198,19 @@ class CustomView: UIView {
         
         vwView.addSubview(lbl2)
         
-        lbl2.topAnchor.constraint(equalTo: lbl1.bottomAnchor, constant: 6).isActive = true
+        lbl2.topAnchor.constraint(equalTo: lbl1.bottomAnchor, constant: 4).isActive = true
         lbl2.leftAnchor.constraint(equalTo: vwView.leftAnchor, constant: 6).isActive = true
         lbl2.rightAnchor.constraint(equalTo: vwView.rightAnchor, constant: -6).isActive = true
         
         vwView.addSubview(lbl3)
         
-        lbl3.topAnchor.constraint(equalTo: lbl2.bottomAnchor, constant: 6).isActive = true
+        lbl3.topAnchor.constraint(equalTo: lbl2.bottomAnchor, constant: 4).isActive = true
         lbl3.leftAnchor.constraint(equalTo: vwView.leftAnchor, constant: 6).isActive = true
         lbl3.rightAnchor.constraint(equalTo: vwView.rightAnchor, constant: -6).isActive = true
         
         vwView.addSubview(lbl4)
         
-        lbl4.topAnchor.constraint(equalTo: lbl3.bottomAnchor, constant: 6).isActive = true
+        lbl4.topAnchor.constraint(equalTo: lbl3.bottomAnchor, constant: 4).isActive = true
         lbl4.leftAnchor.constraint(equalTo: vwView.leftAnchor, constant: 6).isActive = true
         lbl4.rightAnchor.constraint(equalTo: vwView.rightAnchor, constant: -6).isActive = true
 
@@ -236,5 +242,19 @@ class CustomView: UIView {
         stackView.leftAnchor.constraint(equalTo: vwBottomView.leftAnchor).isActive = true
         stackView.rightAnchor.constraint(equalTo: vwBottomView.rightAnchor).isActive = true
 
+        
+        self.addSubview(imvCheck)
+        
+        imvCheck.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        imvCheck.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        imvCheck.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        imvCheck.widthAnchor.constraint(equalToConstant: 30).isActive = true
     }
+    
+    func setImage(img: UIImage) {
+        DispatchQueue.main.async {
+            self.imvCheck.image = img
+        }
+    }
+    
 }
