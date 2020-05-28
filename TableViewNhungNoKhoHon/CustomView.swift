@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CustomViewDelegate {
+    func checkButtonClicked(index: Int)
+}
+
 class CustomView: UIView {
     
     /*
@@ -17,7 +21,11 @@ class CustomView: UIView {
      // Drawing code
      }
      */
+    var delegate: CustomViewDelegate?
+    
     var isChecked = false
+    
+    var index = -1
     
     let vwContainer: UIView = {
         let vw = UIView()
@@ -267,6 +275,7 @@ class CustomView: UIView {
             }
         }
         else if isChecked == false {
+            delegate?.checkButtonClicked(index: index)
             isChecked = true
             DispatchQueue.main.async {
                 self.btnCheck.setImage(UIImage(named: "imgCheckRed"), for: .normal)

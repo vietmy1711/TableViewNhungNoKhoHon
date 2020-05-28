@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol SecondCellDelegate {
+    func disableButton(index: Int)
+}
+
 class SecondCell: UITableViewCell {
     
     var isFirst = false
     
     var isLast = false
+        
+    var delegate: SecondCellDelegate?
     
     let vwView: UIView = {
         let vw = UIView()
@@ -51,6 +57,7 @@ class SecondCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        customView.delegate = self
         contentView.backgroundColor = UIColor(red: 246/255, green: 248/255, blue: 251/255, alpha: 1)
         contentView.addSubview(vwView)
     }
@@ -118,4 +125,10 @@ class SecondCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+}
+
+extension SecondCell: CustomViewDelegate {
+    func checkButtonClicked(index: Int) {
+        delegate?.disableButton(index: index)
+    }
 }

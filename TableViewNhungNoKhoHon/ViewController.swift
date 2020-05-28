@@ -12,7 +12,6 @@ class ViewController: UIViewController {
     
     let tableView: UITableView = {
         let tableView = UITableView()
-        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -26,7 +25,9 @@ class ViewController: UIViewController {
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
-
+    
+    var customView: [CustomView] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -34,10 +35,10 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(UINib(nibName: "FirstCell", bundle: nil), forCellReuseIdentifier: "FirstCell")
         tableView.register(UINib(nibName: "SecondCell", bundle: nil), forCellReuseIdentifier: "SecondCell")
-
+        
         setupUI()
     }
-
+    
     func setupUI() {
         view.addSubview(tableView)
         view.addSubview(btnBottom)
@@ -56,7 +57,7 @@ class ViewController: UIViewController {
         btnBottom.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         btnBottom.layer.cornerRadius = 25
-
+        
     }
 }
 
@@ -77,8 +78,43 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 3 {
             cell.isLast = true
         }
+        cell.customView.index = indexPath.row - 1
+        customView.append(cell.customView)
+        cell.delegate = self
         cell.setupCell()
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //print(indexPath.row)
+    }
+    
+}
+
+extension ViewController: SecondCellDelegate {
+    func disableButton(index: Int) {
+        switch index {
+        case 0:
+            self.customView[1].isChecked = false
+            self.customView[2].isChecked = false
+            DispatchQueue.main.async {
+                self.customView[1].btnCheck.setImage(UIImage(named: "imgCheckWhite"), for: .normal)
+                self.customView[2].btnCheck.setImage(UIImage(named: "imgCheckWhite"), for: .normal)
+            }
+        case 1:
+            self.customView[0].isChecked = false
+            self.customView[2].isChecked = false
+            DispatchQueue.main.async {
+                self.customView[0].btnCheck.setImage(UIImage(named: "imgCheckWhite"), for: .normal)
+                self.customView[2].btnCheck.setImage(UIImage(named: "imgCheckWhite"), for: .normal)
+            }
+        default:
+            self.customView[0].isChecked = false
+            self.customView[1].isChecked = false
+            DispatchQueue.main.async {
+                self.customView[0].btnCheck.setImage(UIImage(named: "imgCheckWhite"), for: .normal)
+                self.customView[1].btnCheck.setImage(UIImage(named: "imgCheckWhite"), for: .normal)
+            }
+        }
+    }
 }
